@@ -1,0 +1,70 @@
+# TornikeO's guide on fullstack development
+
+## Who is this guide for
+Someone who wants to:
+- to publish their work online, as website or an API
+- know how to find a low cost alternatives when hosting a website
+
+## Tools + how to test if you know one
+- You need a way ship **all** dependencies of an app, with the app. Including the OS itself:
+    - Tools:
+        - Docker, and docker compose
+    - Test yourself:
+        - Easy: 
+            - Run [ubuntu image](https://hub.docker.com/_/ubuntu) locally
+            - Connect to the ubuntu instance and create a file named "new.txt" at the root
+            - Copy that file to your host system
+        - Medium:
+            - Create new git repo. Add `docker-compose.yml` file. Two services, one with python (or any other language) and other with database (any database).
+            - Connect one container with the other. Update the database with the language.
+        - Hard:
+            - Create an alpine python dockerfile.
+            - Add `git` to the container, using a multistage build.
+- Creating the UI:
+    - Tools:
+        - Svelte, Sveltekit (Or any other JS framework, as long as you **don't** know how to work with it in advance.)
+    - Test yourself:
+        - Easy:
+            - (Bonus) Create nodejs docker enviornment, and start working there
+            - Follow official guide of that framework to create a simple *static* website.
+        - Medium:
+            - Deploy the website as a `github pages` application.
+        - Hard:
+            - Do the deployment to `github pages` in a single command (you might be able to find an npm package that does this)
+            - Redeploy the static website as an `aws s3 static website`. Follow the official aws guide for this.
+- Creating the backend:
+    - Tools:
+        - Python, NodeJS or Java (For hard mode, use a language that you don't primarily work with)
+    - Test yourself:
+        - Easy:
+            - (Bonus) Create a docker backend enviornment, and start working there
+            - Choose a backend framework for the language
+            - Find and the official guide creating a simple `echo service` for that framework, using that language
+        - Medium:
+            - Create database container, and save something within the database
+        - Hard:
+            - Do all the above using a language you don't work with everyday. Track the time you spent on this. Try to complete all this within 1-2 hours. Be careful and don't spend time staring at the screen, instead, read the docs or choose another framework/approach. 
+- Hosting:
+    - Tools:
+        - Google cloud and aws:
+    - Test yourself:
+        - Easy:
+            - AWS:
+                - Manually upload a file to s3 storage (using web UI).
+                - Create a python script that uploads 5 images to the s3 storage (creating a bucket if it doesn't exist yet).
+            - GCloud:
+                - Manually upload a file to gcloud storage (using web UI).
+                - Install gcloud cli, auth, and upload a folder to a gcloud bucket (check the docs for this)
+            - In both cases:
+                - Make the download URL available publicly (test out the download with a private browser window)
+        - Medium:
+            - AWS:
+                - Create a lambda service, using aws web UI. Query the lambda service using the language of your choice.
+                - Create lambda service, using a container. You'd have to:
+                    - Create dockerfile.
+                    - Create an aws elastic container repository (ECR) using web UI
+                    - Use upload your docker image to ECR.
+                    - Use web ui to deploy container to ECR. Make sure to follow and the AWS guide on this (aws container on lambda).
+            - GCloud:
+                - Create `gcloud run` container service in a single line (hint: `gcloud run deploy ...`), make sure to conform to container restrictions.
+            - In both cases query the service to get the expected outputs.
